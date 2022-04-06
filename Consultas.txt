@@ -1,0 +1,99 @@
+use curso;
+/*
+CONSULTAS
+1. Todos los cursos realizados ordenados cronológicamente que muestre los siguientes campos:
+1.1. nombre del curso
+1.2. identificador del curso
+1.3. número de horas del curso
+1.4. profesor del curso ( nombre, apellido )
+
+
+use curso;
+
+select
+curso_codigo as codigo,
+c.nombre as curso,
+horas,
+fecha,
+p.nombre as profesor
+from imparticion i join curso c on i.curso_id=c.curso_id
+join profesor p on i.profesor_id= p.profesor_id
+order by fecha desc
+;
+*/
+/*
+Detalle de un curso, junto con las reseñas de los usuarios
+
+
+select
+p.curso_codigo,
+c.nombre as curso,
+horas,
+pr.nombre as profesor,
+alumno_id,
+resenia,
+valoracion,
+fecha
+from participantes p inner join imparticion i on p.curso_codigo= i.curso_codigo
+join profesor pr on i.profesor_id=pr.profesor_id
+join curso c on c.curso_id = i.curso_id
+where p.curso_codigo=2177
+order by valoracion desc
+;
+
+*/
+
+
+/*
+SQL listar últimos 5
+cursos
+
+use curso;
+select *
+from curso;
+*/
+
+/*
+SQL listar últimos 5
+cursos
+
+SELECT 
+*
+FROM curso
+Order by horas desc
+limit 5
+;
+*/
+
+/*
+SQL listar últimos 5
+usuarios creados
+
+select
+alumno_id as id,
+nombre,
+apellido
+from alumno
+order by alumno_id desc
+limit 5
+;
+*/
+/*
+SQL detalle curso más
+número de reseñas
+*/
+
+select 
+count(valoracion) as valoraciones,
+i.curso_codigo as codigo,
+c.nombre,
+horas,
+pr.nombre
+
+from imparticion i join participantes o on i.curso_codigo= o.curso_codigo
+join curso c on c.curso_id = i.curso_id
+join profesor pr on pr.profesor_id=i.profesor_id
+group by i.curso_codigo
+limit 1
+;
+
