@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -6,60 +7,59 @@ public class Menu {
 	final static int DETALLES = 2;
 	final static int RESENIAS = 3;
 	final static int SALIR = 0;
+
 //se crea el menu con las opciones correspondientes para que funcione el programa
 	public static void Menu() {
 //TODO arreglar el menu, funciona mal el bucle 
-		Scanner sc = new Scanner(System.in);
-		boolean bucle = false;
+		  App listar = new App();
 
-		do {
-			try {
-				System.out.println("------------------");
-				System.out.println("BIENVENIDO AL MENU");
-				System.out.println("------------------");
-				System.out.println("1.Listado de cursos");
-				System.out.println("2.Detalle del curso");
-				System.out.println("3.Reseñas del curso");
-				System.out.println("0.Salir");
-				System.out.println("");
-				System.out.println("Escoja una opcion ");
-				int opcion = sc.nextInt();
 
-				switch (opcion) {
-				case LISTACURSOS:
-					bucle = false;
-					System.out.println("hola");
+Scanner sn = new Scanner(System.in);
+boolean salir = false;
+int opcion; //Guardaremos la opcion del usuario
 
-					break;
-				case DETALLES:
-					bucle = false;
-					System.out.println("hola2");
-					break;
+while (!salir) {
+	System.out.println("------------------");
+	System.out.println("BIENVENIDO AL MENU");
+	System.out.println("------------------");
+	System.out.println("1.Listado de cursos");
+	System.out.println("2.Detalle del curso");
+	System.out.println("3.Curso con mas Reseñas ");
+	System.out.println("4.Salir");
+	System.out.println("");
 
-				case RESENIAS:
-					bucle = false;
-					System.out.println("Hola3");
 
-				case SALIR:
-			
-					System.out.println("..................");
-					System.out.println(".FIN DEL PROGRAMA.");
-					System.out.println("..................");
-					break;
+    try {
 
-				default:
-					bucle = true;
-					System.out.println("Error, Las opciones son del 1-3");
-					break;
-				}
+        System.out.println("Escoje una de las opciones");
+        opcion = sn.nextInt();
 
-			} catch (Exception e) {
-		
-				System.out.println("........................");
-				System.out.println("ERROR DATO INVALIDO");
-				break;
+        switch (opcion) {
+            case LISTACURSOS:
+        
+          listar.listar();
+                break;
+            case DETALLES:
+               listar.detalles();
+                break;
+            case RESENIAS:
+              listar.masResenias();
+                break;
+            case 4:
+                salir = true;
+                System.out.println("----------------");
+                System.out.println("FIN DEL PROGRAMA");
+                System.out.println("----------------");
+                break;
+            default:
+                System.out.println("Solo números entre 1 y 4");
+        }
+    } catch (InputMismatchException e) {
+        System.out.println("Debes insertar un número");
+        sn.next();
+    }
+}
 
-			}
-		} while (bucle==true);
-	}
+}
+
 }
